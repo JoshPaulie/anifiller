@@ -1,12 +1,13 @@
 # anifiller
 
-A simple CLI tool to check which anime episodes are canon, mixed canon/filler, or filler by scraping [animefillerlist.com](https://www.animefillerlist.com).
+A simple CLI tool to identify and organize anime episodes by type (canon, mixed, filler) using data from [animefillerlist.com](https://www.animefillerlist.com).
 
 ## Features
 
 - Get filler list of a particular show
 - Get all shows available on [animefillerlist.com](https://www.animefillerlist.com)
 - Smart suggestions
+- Move filler/mixed episodes to a separate folder
 
 ## Installation
 
@@ -22,7 +23,7 @@ Anifiller requires show names to be in "slug" format (lowercase, hyphenated) as 
 ### Get episode information for a show
 
 ```bash
-anifiller dragon-ball
+anifiller list dragon-ball
 ```
 
 Output:
@@ -35,7 +36,7 @@ Filler: 30-33, 45, 79-83, 127-132, 149-153
 ### JSON output
 
 ```bash
-anifiller naruto --json
+anifiller list naruto --json
 ```
 
 Output:
@@ -72,13 +73,13 @@ Output:
 ### List all available shows
 
 ```bash
-anifiller --shows
+anifiller list --shows
 ```
 
 #### Filter shows by name
 
 ```bash
-anifiller --shows "dragon ball"
+anifiller list --shows "dragon ball"
 ```
 
 Output:
@@ -126,11 +127,43 @@ Did you mean one of these shows?
   Dragon Ball Z (slug: dragon-ball-z)
   Dragon Ball GT (slug: dragon-ball-gt)
 
-Try: anifiller dragon-ball
+Try: anifiller list dragon-ball
 ```
+
+### Move filler episodes
+
+Move filler and/or mixed episodes to a "filler" subfolder:
+
+```bash
+anifiller mover --directory /path/to/anime/episodes --slug naruto --filler
+```
+
+```bash
+anifiller mover -d /path/to/episodes -s dragon-ball --filler --mixed
+```
+
+Supports various file naming patterns:
+- `1. First Episode.mkv`
+- `Episode 01.mp4`
+- `S01E01.avi`
+- `Ep01.mkv`
+
+## Commands
+
+- `list` - Show episode information and available shows
+- `mover` - Move filler/mixed episodes to a separate folder
 
 ## Options
 
+### List command
 - `--json` - Output data in JSON format
 - `--shows [filter]` - List all available shows, optionally filtered by name/slug
+
+### Mover command
+- `--directory, -d` - Series directory containing episode files
+- `--slug, -s` - Anime show slug (e.g., 'naruto', 'dragon-ball')
+- `--filler` - Move filler episodes
+- `--mixed` - Move mixed canon/filler episodes
+
+### General
 - `--help` - Show help message
