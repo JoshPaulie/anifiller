@@ -42,6 +42,8 @@ def find_episode_files(directory: str, episodes: list[int]) -> list[tuple[int, s
                     except ValueError:
                         continue
 
+    # Sort by episode number for consistent display
+    found_files.sort(key=lambda x: x[0])
     return found_files
 
 
