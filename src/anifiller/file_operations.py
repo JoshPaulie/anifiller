@@ -21,13 +21,14 @@ def find_episode_files(directory: str, episodes: list[int]) -> list[tuple[int, s
     for file_path in directory_path.iterdir():
         if file_path.is_file() and file_path.suffix.lower() in video_extensions:
             # Try to extract episode number from filename
-            # Look for patterns like "Episode 01", "E01", "S01E01", "1. First Episode", etc.
+            # Look for patterns like "Episode 01", "1. First Episode", etc.
+            # Prioritize "Episode X" format in titles over season/episode codes
             filename = file_path.stem
             episode_patterns = [
+                r"- Episode (\d+)",  # S01E01 - Episode 1 Title (prioritize this)
                 r"^(\d+)\.\s",  # 1. First Episode, 2. Second Episode
-                r"(?:episode|ep|e)[\s._-]*(\d+)",  # Episode 01, Ep01, E01
-                r"s\d+e(\d+)",  # S01E01
-                r"(\d+)",  # Just a number
+                r"(?:episode|ep)[\s._-]*(\d+)",  # Episode 01, Ep01 (but not SxxExx format)
+                r"(\d+)",  # Just a number (fallback)
             ]
 
             for pattern in episode_patterns:
