@@ -66,9 +66,8 @@ def move_episodes_to_filler_folder(directory: str, episode_files: list[tuple[int
 
         try:
             shutil.move(str(source_path), str(destination_path))
-            print(f"Moved episode {episode_num}: {source_path.name}")
             moved_count += 1
         except OSError as e:
             print(f"Error moving episode {episode_num} ({source_path.name}): {e}", file=sys.stderr)
 
-    print(f"\nMoved {moved_count} episode(s) to the filler folder.")
+    print(f"Moved {moved_count} episode(s) to the filler folder.")
