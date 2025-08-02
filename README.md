@@ -142,6 +142,12 @@ anifiller mover --directory /path/to/anime/episodes --slug naruto --filler
 anifiller mover -d /path/to/episodes -s dragon-ball --filler --mixed
 ```
 
+Preview what would be moved without actually moving files:
+
+```bash
+anifiller mover -d /path/to/episodes -s naruto --filler --dry-run
+```
+
 Supports various file naming patterns:
 - `1. First Episode.mkv`
 - `Episode 01.mp4`
@@ -164,6 +170,7 @@ Supports various file naming patterns:
 - `--slug, -s` - Anime show slug (e.g., 'naruto', 'dragon-ball')
 - `--filler` - Move filler episodes
 - `--mixed` - Move mixed canon/filler episodes
+- `--dry-run` - Show what would be moved without actually moving files
 
 ### General
 - `--help` - Show help message

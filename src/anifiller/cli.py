@@ -70,6 +70,11 @@ def _create_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Move mixed canon/filler episodes",
     )
+    mover_parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Show what would be moved without actually moving files",
+    )
 
     return parser
 
